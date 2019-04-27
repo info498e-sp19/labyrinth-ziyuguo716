@@ -48,6 +48,7 @@ export class CommandParser {
 
       if(cmd === Command.QUIT){
         //could add "goodbye" message here
+        console.log('Thanks for playing this game! Bye-bye!');
         this.io.close();
       }
       else if(Command[cmd]) {
