@@ -1,4 +1,5 @@
 import {Command, CommandParser} from './Parser';
+import { Area } from './Area';
 
 //an example input handler function
 function handleInput(cmd:Command, arg:string):boolean {
@@ -17,3 +18,9 @@ function handleInput(cmd:Command, arg:string):boolean {
 let parser = new CommandParser(handleInput); //pass in the "handler" callback
 console.log('Input a command:')
 parser.start();
+
+
+
+let area00 = new Area()
+
+area11 'Gryffindor Common Room' 
