@@ -1,10 +1,12 @@
 import {Location} from './Location'
 import {IHazard} from './Hazard'
-import { dirname } from 'path';
+import {IItem} from "./Item"
 
 export class Area{
-    private nextArea: Area[]
-    private dir = []
+    private nextArea: Area[] =[]
+    private dir: string[] = []
+    private isTaken = false;
+    private isClear = false;
 
     constructor(
         private name: string, 
@@ -21,7 +23,7 @@ export class Area{
         return this.location
     }
 
-    public setAdj(area: Area[]){
+    public setAdjArea(area: Area[]){
         this.nextArea = area
         area.forEach(a => {
             if(a.getLocation().getX() === this.location.getX()){
@@ -43,20 +45,40 @@ export class Area{
         });
     }
 
+    public getDir(){
+        return this.dir;
+    }
+
+    public getNextArea(){
+        return this.nextArea;
+    }
+
+    public getHazard(){
+        return this.hazard.getName();
+    }
+
+    public checkTaken(){
+        return this.isTaken;
+    }
+
+    public checkClear(){
+        return this.isClear;
+    }
+
     public removeHazard(){
-        this.hazard = null
+        this.isClear = true;
     }
 
     public removeItem(){
-        this.item = null
+        this.isTaken = true;
     }
 
     public sayHi(){
         console.log(this.description)
-        if (this.hazard != null){
+        if (!this.isClear){
             console.log(this.hazard.sayHi())
         }
-        if(this.item != null){
+        if(!this.isTaken){
             console.log(this.item.sayHi())
         }
     }

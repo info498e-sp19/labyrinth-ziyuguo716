@@ -1,5 +1,6 @@
 import {IItem} from "./Item"
 import {Inventory} from "./Inventory"
+import {Area} from "./Area"
 
 export class Player{
     private inventory: Inventory = new Inventory();
@@ -20,20 +21,31 @@ export class Player{
 
     public takeItem(item: IItem){
         this.inventory.add(item);
-        this.currArea.remove(item);
+        this.currArea.removeItem();
     }
 
-    public move(nextArea: Area){
-        this.currArea=nextArea;
+    public move(direction: string): void {
+        let nextMove = this.currArea.getDir();
+        nextMove.forEach(x => {
+            if (x===direction){
+                let idx = nextMove.indexOf(x);
+                let nextArea = this.currArea.getNextArea()[idx];
+                this.currArea = nextArea;
+                nextArea.sayHi();
+            } else {
+                console.log('You cannot go '+ direction);
+            }
+        });
     }
-    
+
     public useItem(item: IItem){
         this.inventory.getInventoryList().forEach(i => {
             if (i===item){
                 this.inventory.remove(item) //remove item from inventory
                 if (item.getHazard() === this.currArea.getHazard()){
-                    area.removeHazard()
+                    this.currArea.removeHazard()
                     item.printSuccess()
+                    this.currArea.sayBye();
                 }
                 else{
                     item.printFail()
