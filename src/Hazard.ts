@@ -1,5 +1,4 @@
 export interface IHazard{
-    name: string
     getName(): string
     sayHi(): void
     printFail(): void
@@ -7,7 +6,7 @@ export interface IHazard{
 
 export class Cliff implements IHazard{
     constructor(){}
-    name = 'cliff'
+    private name = 'cliff'
     
     public getName(){
         return this.name;
@@ -21,7 +20,9 @@ export class Cliff implements IHazard{
 }
 
 export class Snape implements IHazard{
-    name = 'snape'
+    constructor(){}
+    private name = 'snape'
+    
     public getName(){
         return this.name;
     }
@@ -35,7 +36,8 @@ export class Snape implements IHazard{
 
 export class Divination implements IHazard{
     constructor(){}
-    name = 'divination'
+    private name = 'divination'
+
     public getName(){
         return this.name;
     }

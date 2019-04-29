@@ -76,6 +76,9 @@ export class SpellScroll implements IItem{
     private name: string = 'Spell Scroll'
     constructor(){}
 
+    public sayHi(){
+        console.log('There is a Spell Scroll on the floor.')
+    }
     public getName(){
         return this.name;
     }
