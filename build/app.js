@@ -10,19 +10,13 @@ const Monster_1 = require("./Monster");
 //an example input handler function
 function handleInput(cmd, arg) {
     //the arguments are the command and "arguments" the user has entered
-    // console.log("Handling", cmd, "with argument '"+arg+"'");
+    console.log("@@@@@@@@@@@ Harry Porter Labyrinth @@@@@@@@@@@");
+    if (!player.checkIsTrapped()) {
+        monster.wander();
+    }
     //an example of handling a particular input
     if (cmd === Parser_1.Command.GO) {
-        if (!player.checkIsTrapped()) {
-            monster.wander();
-        }
         player.move(arg);
-        if (player.checkPlayerIsDead()) {
-            return false;
-        }
-        if (player.isWinner()) {
-            return false;
-        }
     }
     else if (cmd === Parser_1.Command.TAKE) {
         if (player.getCurrArea().hasItem(arg)) {
@@ -41,6 +35,14 @@ function handleInput(cmd, arg) {
     else if (cmd === Parser_1.Command.LOOK) {
         player.look();
     }
+    if (player.checkPlayerIsDead()) {
+        return false;
+    }
+    if (player.isWinner()) {
+        return false;
+    }
+    console.log('');
+    console.log('What would you like to do?');
     return true; //return true to indicate that it should prompt for another input
 }
 let area00 = new Area_1.Area('Slytherin Dungeon', 'You are at Slytherin Dungeon', new Location_1.Location(0, 0), new Item_1.Goblet(), new Hazard_1.Snape());
@@ -65,7 +67,9 @@ let player = new Player_1.Player(area11);
 let monster = new Monster_1.Monster(area02);
 //an example of using the CommandParser
 let parser = new Parser_1.CommandParser(handleInput); //pass in the "handler" callback
+console.log("@@@@@@@@@@@ Harry Porter Labyrinth @@@@@@@@@@@");
 player.getCurrArea().sayHi();
+console.log('');
 console.log('What would you like to do?');
 parser.start();
 //# sourceMappingURL=app.js.map

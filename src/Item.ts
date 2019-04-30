@@ -74,7 +74,7 @@ export class SpellScroll implements IItem {
     public printSuccess() {
         //"Expecto Patronum!"
         console.log('You use the magic spell that you read from the scroll and summon your Patronus Charm')
-        console.log('The Demontor is gone.')
+        console.log('The Demontor is killed.')
     }
     public printFail() {
         console.log('You use the magic spell but there is no Demontor around. You wasted the spell.')
@@ -86,7 +86,7 @@ export class Goblet implements IItem {
     constructor() { }
 
     public sayHi() {
-        console.log('You must find a way to take the Goblet without his notice.')
+        console.log('The Goblet of Fire is just behind Snape!!')
     }
     public getName() {
         return this.name;

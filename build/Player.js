@@ -32,6 +32,10 @@ class Player {
         this.prevArea = newArea;
     }
     takeItem(item) {
+        if (this.isTrapByMonster) {
+            this.killedByMonster();
+            return;
+        }
         if (this.currArea.checkClear()) {
             this.inventory.add(item);
             this.currArea.removeItem();
@@ -45,17 +49,21 @@ class Player {
             }
             this.currArea.getHazard().printFail();
         }
+        this.printMonster();
     }
     checkPlayerIsDead() {
         return this.isDead;
+    }
+    killedByMonster() {
+        this.currArea.getMonster().printFail();
+        this.isDead = true;
+        console.log('You Die!!! Game Over!');
     }
     move(direction) {
         let nextMove = this.currArea.getDir();
         let isMoved = false;
         if (this.isTrapByMonster) {
-            this.currArea.getMonster().printFail();
-            this.isDead = true;
-            console.log('You Die!!! Game Over!');
+            this.killedByMonster();
             return;
         }
         nextMove.forEach(x => {
@@ -69,15 +77,13 @@ class Player {
                     this.prevArea = this.currArea;
                     this.currArea = nextArea;
                     this.currArea.sayHi();
-                    if (this.currArea.hasMonster()) {
-                        this.isTrapByMonster = true;
-                    }
                     isMoved = true;
                 }
             }
         });
         if (!isMoved)
             console.log('You cannot go ' + direction);
+        this.printMonster();
     }
     useItem(item) {
         let foundItem = false;
@@ -85,40 +91,62 @@ class Player {
             if (i.getName().toUpperCase() === item.toUpperCase()) {
                 foundItem = true;
                 this.inventory.remove(i); //remove item from inventory
-                if (item.toUpperCase() === this.currArea.getMonster().getItemName().toUpperCase()) {
+                if (this.currArea.hasMonster() &&
+                    item.toUpperCase() === this.currArea.getMonster().getItemName().toUpperCase()) {
                     this.killMonster();
                     this.currArea.removeMonster();
                     this.isTrapByMonster = false;
                     i.printSuccess();
-                    return;
                 }
-                if (item.toUpperCase() === this.currArea.getHazard().getItemName().toUpperCase()) {
+                else if (!this.currArea.checkClear() &&
+                    item.toUpperCase() === this.currArea.getHazard().getItemName().toUpperCase()) {
                     this.currArea.removeHazard();
                     i.printSuccess();
                     this.currArea.sayBye();
-                    return;
                 }
                 else {
                     i.printFail();
-                    return;
                 }
             }
         });
+        if (this.isTrapByMonster) {
+            this.killedByMonster();
+            return;
+        }
         if (!foundItem) {
             console.log("You don't have this item! Please CHECK your spelling!");
         }
+        this.printMonster();
     }
     killMonster() {
         this.currArea.getMonster().setIsDead();
     }
     look() {
+        if (this.isTrapByMonster) {
+            this.killedByMonster();
+            return;
+        }
         this.currArea.sayHi();
+        this.printMonster();
     }
     printInventory() {
+        if (this.isTrapByMonster) {
+            this.killedByMonster();
+            return;
+        }
         console.log('Below is your current inventory list:');
         this.inventory.getInventoryList().forEach(x => {
             console.log(x.getName());
         });
+        this.printMonster();
+    }
+    printMonster() {
+        if (this.currArea.hasMonster()) {
+            if (!this.currArea.getMonster().checkMonsterIsDead()) {
+                this.currArea.getMonster().sayHi();
+                this.isTrapByMonster = true;
+            }
+        }
     }
     isWinner() {
         if (this.currArea.isSameArea(0, 2)) {

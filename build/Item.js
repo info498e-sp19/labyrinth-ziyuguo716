@@ -68,7 +68,7 @@ class SpellScroll {
     printSuccess() {
         //"Expecto Patronum!"
         console.log('You use the magic spell that you read from the scroll and summon your Patronus Charm');
-        console.log('The Demontor is gone.');
+        console.log('The Demontor is killed.');
     }
     printFail() {
         console.log('You use the magic spell but there is no Demontor around. You wasted the spell.');
@@ -80,7 +80,7 @@ class Goblet {
         this.name = 'Goblet of Fire';
     }
     sayHi() {
-        console.log('You must find a way to take the Goblet without his notice.');
+        console.log('The Goblet of Fire is just behind Snape!!');
     }
     getName() {
         return this.name;
