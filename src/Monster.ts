@@ -4,13 +4,14 @@ export class Monster{
     private name = 'dementor'
     private itemName = 'Spell Scroll'
     private isAtEast: boolean;
-    private isDead: boolean = false;
+    private isDead: boolean;
     constructor(private currArea: Area){
         this.isAtEast=true;
+        this.isDead = false;
     }
 
-    public setIsDead(isKilled: boolean){
-        this.isDead=isKilled;
+    public setIsDead(){
+        this.isDead=true;
     }
 
     public checkMonsterIsDead(){

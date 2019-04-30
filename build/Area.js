@@ -93,7 +93,7 @@ class Area {
     sayHi() {
         console.log(this.getName().toUpperCase());
         console.log(this.description);
-        if (this.hasMonster() && this.monster.checkMonsterIsDead()) {
+        if (this.hasMonster() && !this.monster.checkMonsterIsDead()) {
             this.monster.sayHi();
         }
         if (!this.checkClear()) {

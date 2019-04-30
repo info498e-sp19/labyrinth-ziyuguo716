@@ -5,11 +5,11 @@ class Monster {
         this.currArea = currArea;
         this.name = 'dementor';
         this.itemName = 'Spell Scroll';
-        this.isDead = false;
         this.isAtEast = true;
+        this.isDead = false;
     }
-    setIsDead(isKilled) {
-        this.isDead = isKilled;
+    setIsDead() {
+        this.isDead = true;
     }
     checkMonsterIsDead() {
         return this.isDead;

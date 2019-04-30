@@ -10,7 +10,7 @@ const Monster_1 = require("./Monster");
 //an example input handler function
 function handleInput(cmd, arg) {
     //the arguments are the command and "arguments" the user has entered
-    console.log("Handling", cmd, "with argument '" + arg + "'");
+    // console.log("Handling", cmd, "with argument '"+arg+"'");
     //an example of handling a particular input
     if (cmd === Parser_1.Command.GO) {
         if (!player.checkIsTrapped()) {

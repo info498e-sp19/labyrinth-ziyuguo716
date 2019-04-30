@@ -104,8 +104,8 @@ export class Player {
                 foundItem = true;
                 this.inventory.remove(i) //remove item from inventory
                 if (item.toUpperCase() === this.currArea.getMonster().getItemName().toUpperCase()) {
-                    this.currArea.removeMonster()
                     this.killMonster();
+                    this.currArea.removeMonster()
                     this.isTrapByMonster = false;
                     i.printSuccess()
                     return;
@@ -128,7 +128,7 @@ export class Player {
     }
 
     public killMonster(){
-        this.currArea.getMonster().setIsDead(true);
+        this.currArea.getMonster().setIsDead();
     }
 
     public look() {
