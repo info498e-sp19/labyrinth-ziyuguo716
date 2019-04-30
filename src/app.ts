@@ -4,6 +4,7 @@ import {Location} from './Location'
 import {IHazard, Divination, Cliff,Snape} from './Hazard'
 import {IItem, FlyingBroom, InvisibleCloak, CrystalBall, SpellScroll,Goblet} from './Item'
 import { Player } from './Player';
+import { Monster } from './Monster';
 
 //an example input handler function
 function handleInput(cmd:Command, arg:string):boolean {
@@ -12,8 +13,16 @@ function handleInput(cmd:Command, arg:string):boolean {
 
   //an example of handling a particular input
   if(cmd === Command.GO){ 
+    if(!player.checkIsTrapped()){
+      monster.wander();
+    }
     player.move(arg);
-    player.isWinner();
+    if(player.checkPlayerIsDead()){
+      return false;
+    }
+    if(player.isWinner()){
+      return false;
+    } 
   } else if (cmd === Command.TAKE){
       if (player.getCurrArea().hasItem(arg)){
         player.takeItem(player.getCurrArea().getItem());
@@ -40,7 +49,7 @@ new Location(0,0), new Goblet(), new Snape())
 let area01 = new Area('Divination Classroom', 'You are at the divination classroom',
 new Location(0,1),undefined, new Divination())
 
-let area02 = new Area('Dumbledore Office','Dumbledore is looking at you',
+let area02 = new Area('Dumbledore Office','Dumbledore is waiting for you to bring the Goblet',
 new Location(0,2))
 
 let area10 = new Area('Hospital Wing','You are at the Hospital Wing.',
@@ -73,6 +82,7 @@ area22.setAdjArea([area21, area12])
 
 
 let player = new Player(area11)
+let monster = new Monster(area02)
 
 //an example of using the CommandParser
 let parser = new CommandParser(handleInput); //pass in the "handler" callback

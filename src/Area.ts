@@ -1,6 +1,7 @@
 import {Location} from './Location'
 import {IHazard} from './Hazard'
 import {IItem} from "./Item"
+import {Monster} from './Monster'
 
 export class Area{
     private nextArea: Area[] =[]
@@ -13,7 +14,8 @@ export class Area{
         private description: string, 
         private location: Location,
         private item?: IItem, 
-        private hazard?: IHazard
+        private hazard?: IHazard,
+        private monster?: Monster
         ){
             if(this.item == undefined)
                 this.isTaken = true
@@ -35,6 +37,10 @@ export class Area{
 
     public getItem(){
         return this.item;
+    }
+
+    public getMonster(){
+        return this.monster;
     }
 
     public setAdjArea(area: Area[]){
@@ -79,6 +85,22 @@ export class Area{
         return this.isClear;
     }
 
+    public hasMonster(){
+        let hasMonster = false;
+        
+        if(this.monster!=undefined){
+            hasMonster = true;
+        }
+        return hasMonster;
+    }
+
+    public addMonster(mons: Monster){
+        this.monster=mons;
+    }
+    public removeMonster(){
+        this.monster=undefined;
+    }
+
     public removeHazard(){
         this.isClear = true;
     }
@@ -94,13 +116,17 @@ export class Area{
     public sayHi(){
         console.log(this.getName().toUpperCase())
         console.log(this.description)
-        if (!this.isClear){
-            console.log(this.hazard.sayHi())
+
+        if(this.hasMonster()&&this.monster.checkMonsterIsDead()){
+            this.monster.sayHi();
+        }
+        if (!this.checkClear()){
+            this.hazard.sayHi();
         } else {
             this.sayBye();
         }
         if(!this.isTaken){
-            console.log(this.item.sayHi())
+            this.item.sayHi();
         }
     }
 

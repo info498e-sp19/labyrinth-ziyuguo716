@@ -7,6 +7,11 @@ class Player {
         this.inventory = new Inventory_1.Inventory();
         this.prevArea = this.currArea;
         this.hasTreasure = false;
+        this.isTrapByMonster = false;
+        this.isDead = false;
+    }
+    checkIsTrapped() {
+        return this.isTrapByMonster;
     }
     getCurrArea() {
         return this.currArea;
@@ -35,12 +40,24 @@ class Player {
                 this.hasTreasure = true;
         }
         else {
+            if (this.currArea.getMonster() != undefined) {
+                this.currArea.getMonster().printFail();
+            }
             this.currArea.getHazard().printFail();
         }
+    }
+    checkPlayerIsDead() {
+        return this.isDead;
     }
     move(direction) {
         let nextMove = this.currArea.getDir();
         let isMoved = false;
+        if (this.isTrapByMonster) {
+            this.currArea.getMonster().printFail();
+            this.isDead = true;
+            console.log('You Die!!! Game Over!');
+            return;
+        }
         nextMove.forEach(x => {
             if (x === direction) {
                 let idx = nextMove.indexOf(x);
@@ -52,6 +69,9 @@ class Player {
                     this.prevArea = this.currArea;
                     this.currArea = nextArea;
                     this.currArea.sayHi();
+                    if (this.currArea.hasMonster()) {
+                        this.isTrapByMonster = true;
+                    }
                     isMoved = true;
                 }
             }
@@ -65,6 +85,13 @@ class Player {
             if (i.getName().toUpperCase() === item.toUpperCase()) {
                 foundItem = true;
                 this.inventory.remove(i); //remove item from inventory
+                if (item.toUpperCase() === this.currArea.getMonster().getItemName().toUpperCase()) {
+                    this.currArea.removeMonster();
+                    this.killMonster();
+                    this.isTrapByMonster = false;
+                    i.printSuccess();
+                    return;
+                }
                 if (item.toUpperCase() === this.currArea.getHazard().getItemName().toUpperCase()) {
                     this.currArea.removeHazard();
                     i.printSuccess();
@@ -81,6 +108,9 @@ class Player {
             console.log("You don't have this item! Please CHECK your spelling!");
         }
     }
+    killMonster() {
+        this.currArea.getMonster().setIsDead(true);
+    }
     look() {
         this.currArea.sayHi();
     }
@@ -94,11 +124,12 @@ class Player {
         if (this.currArea.isSameArea(0, 2)) {
             if (this.checkHasTreasure()) {
                 console.log('Congrats! You win!!!');
-                return false;
+                return true;
             }
             else {
                 console.log('Although you are at the exit, you do not have the treasure....');
                 console.log('Please keep searching for the treasure');
+                return false;
             }
         }
     }

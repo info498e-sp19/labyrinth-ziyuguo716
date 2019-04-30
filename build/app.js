@@ -6,14 +6,23 @@ const Location_1 = require("./Location");
 const Hazard_1 = require("./Hazard");
 const Item_1 = require("./Item");
 const Player_1 = require("./Player");
+const Monster_1 = require("./Monster");
 //an example input handler function
 function handleInput(cmd, arg) {
     //the arguments are the command and "arguments" the user has entered
     console.log("Handling", cmd, "with argument '" + arg + "'");
     //an example of handling a particular input
     if (cmd === Parser_1.Command.GO) {
+        if (!player.checkIsTrapped()) {
+            monster.wander();
+        }
         player.move(arg);
-        player.isWinner();
+        if (player.checkPlayerIsDead()) {
+            return false;
+        }
+        if (player.isWinner()) {
+            return false;
+        }
     }
     else if (cmd === Parser_1.Command.TAKE) {
         if (player.getCurrArea().hasItem(arg)) {
@@ -36,7 +45,7 @@ function handleInput(cmd, arg) {
 }
 let area00 = new Area_1.Area('Slytherin Dungeon', 'You are at Slytherin Dungeon', new Location_1.Location(0, 0), new Item_1.Goblet(), new Hazard_1.Snape());
 let area01 = new Area_1.Area('Divination Classroom', 'You are at the divination classroom', new Location_1.Location(0, 1), undefined, new Hazard_1.Divination());
-let area02 = new Area_1.Area('Dumbledore Office', 'Dumbledore is looking at you', new Location_1.Location(0, 2));
+let area02 = new Area_1.Area('Dumbledore Office', 'Dumbledore is waiting for you to bring the Goblet', new Location_1.Location(0, 2));
 let area10 = new Area_1.Area('Hospital Wing', 'You are at the Hospital Wing.', new Location_1.Location(1, 0), new Item_1.InvisibleCloak());
 let area11 = new Area_1.Area('Gryffindor Common Room', 'You are at the start point: Gryffindor Common Room', new Location_1.Location(1, 1));
 let area12 = new Area_1.Area('Disused Classroom', 'You are at Disused Classroom', new Location_1.Location(1, 2), new Item_1.SpellScroll());
@@ -53,6 +62,7 @@ area20.setAdjArea([area10, area21]);
 area21.setAdjArea([area11, area20, area22]);
 area22.setAdjArea([area21, area12]);
 let player = new Player_1.Player(area11);
+let monster = new Monster_1.Monster(area02);
 //an example of using the CommandParser
 let parser = new Parser_1.CommandParser(handleInput); //pass in the "handler" callback
 console.log('Input a command:');

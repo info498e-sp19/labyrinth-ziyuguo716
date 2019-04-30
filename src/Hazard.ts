@@ -29,8 +29,7 @@ export class Snape implements IHazard{
     constructor(){}
     private name = 'snape'
     private itemName = 'Cloak of Invisibility'
-
-    
+      
     public getName(){
         return this.name;
     }
