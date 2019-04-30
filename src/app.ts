@@ -9,7 +9,7 @@ import { Monster } from './Monster';
 //an example input handler function
 function handleInput(cmd:Command, arg:string):boolean {
   //the arguments are the command and "arguments" the user has entered
-  console.log("Handling", cmd, "with argument '"+arg+"'");
+  // console.log("Handling", cmd, "with argument '"+arg+"'");
 
   //an example of handling a particular input
   if(cmd === Command.GO){ 
@@ -86,6 +86,7 @@ let monster = new Monster(area02)
 
 //an example of using the CommandParser
 let parser = new CommandParser(handleInput); //pass in the "handler" callback
-console.log('Input a command:')
+player.getCurrArea().sayHi();
+console.log('What would you like to do?')
 
 parser.start();

@@ -65,6 +65,7 @@ let player = new Player_1.Player(area11);
 let monster = new Monster_1.Monster(area02);
 //an example of using the CommandParser
 let parser = new Parser_1.CommandParser(handleInput); //pass in the "handler" callback
-console.log('Input a command:');
+player.getCurrArea().sayHi();
+console.log('What would you like to do?');
 parser.start();
 //# sourceMappingURL=app.js.map
