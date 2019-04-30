@@ -66,8 +66,7 @@ export class Player{
                     this.currArea.sayHi();
                     isMoved=true;
                 }
-                
-            } 
+            }
         });
         if (!isMoved)
             console.log('You cannot go '+ direction);
@@ -82,7 +81,6 @@ export class Player{
                 if (item.toUpperCase() === this.currArea.getHazard().getItemName().toUpperCase()){
                     this.currArea.removeHazard()
                     i.printSuccess()
-                    this.currArea.sayBye();
                     return;
                 }
                 else{
@@ -117,5 +115,11 @@ export class Player{
                 console.log('Please keep searching for the treasure')
             }
         }
+    }
+
+    public die(){
+        console.log('The Dementor took your soul......')
+        console.log('Game over! Good luck next time!')
+        return false
     }
 }

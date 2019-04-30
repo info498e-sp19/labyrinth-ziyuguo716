@@ -1,80 +1,86 @@
-import {Command, CommandParser} from './Parser';
+import { Command, CommandParser } from './Parser';
 import { Area } from './Area';
-import {Location} from './Location'
-import {IHazard, Divination, Cliff,Snape} from './Hazard'
-import {IItem, FlyingBroom, InvisibleCloak, CrystalBall, SpellScroll,Goblet} from './Item'
+import { Location } from './Location'
+import { IHazard, Divination, Cliff, Snape } from './Hazard'
+import { IItem, FlyingBroom, InvisibleCloak, CrystalBall, SpellScroll, Goblet } from './Item'
 import { Player } from './Player';
+import { JsonLoader } from './JsonLoader';
 
-//an example input handler function
-function handleInput(cmd:Command, arg:string):boolean {
+function handleInput(cmd: Command, arg: string): boolean {
   //the arguments are the command and "arguments" the user has entered
-  console.log("Handling", cmd, "with argument '"+arg+"'");
+  console.log("Handling", cmd, "with argument '" + arg + "'");
 
   //an example of handling a particular input
-  if(cmd === Command.GO){ 
+  if (cmd === Command.GO) {
     player.move(arg);
     player.isWinner();
-  } else if (cmd === Command.TAKE){
-      if (player.getCurrArea().hasItem(arg)){
-        player.takeItem(player.getCurrArea().getItem());
-      } else {
-        console.log('You cannot take ' + arg);
-      }
+  } else if (cmd === Command.TAKE) {
+    if (player.getCurrArea().hasItem(arg)) {
+      player.takeItem(player.getCurrArea().getItem());
+    } else {
+      console.log('You cannot take ' + arg);
+    }
   } else if (cmd === Command.USE) {
-      player.useItem(arg);
+    player.useItem(arg);
   } else if (cmd === Command.INVENTORY) {
-      player.printInventory();
-  } else if (cmd === Command.LOOK){
-      player.look();
+    player.printInventory();
+  } else if (cmd === Command.LOOK) {
+    player.look();
   }
 
   return true; //return true to indicate that it should prompt for another input
 }
 
 
+// let area00 = new Area('Slytherin Dungeon', 'You are at Slytherin Dungeon',
+//   new Location(0, 0), new Goblet(), new Snape())
 
+// let area01 = new Area('Divination Classroom', 'You are at the divination classroom',
+//   new Location(0, 1), undefined, new Divination())
 
-let area00 = new Area('Slytherin Dungeon','You are at Slytherin Dungeon',
-new Location(0,0), new Goblet(), new Snape())
+// let area02 = new Area('Dumbledore Office', 'Dumbledore is looking at you',
+//   new Location(0, 2))
 
-let area01 = new Area('Divination Classroom', 'You are at the divination classroom',
-new Location(0,1),undefined, new Divination())
+// let area10 = new Area('Hospital Wing', 'You are at the Hospital Wing.',
+//   new Location(1, 0), new InvisibleCloak())
 
-let area02 = new Area('Dumbledore Office','Dumbledore is looking at you',
-new Location(0,2))
+ let area11 = new Area('Gryffindor Common Room', 'You are at the start point: Gryffindor Common Room',
+  new Location(1, 1))
 
-let area10 = new Area('Hospital Wing','You are at the Hospital Wing.',
-new Location(1,0), new InvisibleCloak())
+let area12 = new Area('Disused Classroom', 'You are at Disused Classroom',
+   new Location(1, 2), new SpellScroll())
 
-let area11 = new Area('Gryffindor Common Room', 'You are at the start point: Gryffindor Common Room',
-new Location(1,1))
+// let area20 = new Area('Forbidden Forest', 'You are at the Forbidden Forest',
+//   new Location(2, 0), undefined, new Cliff())
 
-let area12 = new Area('Disused Classroom','You are at Disused Classroom',
-new Location(1,2), new SpellScroll())
+ let area21 = new Area('Storage Room', 'You are at Storage Room',
+   new Location(2, 1), new FlyingBroom())
 
-let area20 = new Area('Forbidden Forest','You are at the Forbidden Forest',
-new Location(2,0),undefined, new Cliff())
+// let area22 = new Area('Trophy Room', 'You are at Trophy Room',
+//   new Location(2, 2), new CrystalBall())
 
-let area21 = new Area('Storage Room','You are at Storage Room',
-new Location(2,1), new FlyingBroom())
-
-let area22 = new Area('Trophy Room','You are at Trophy Room',
-new Location(2,2), new CrystalBall())
-
-area00.setAdjArea([area01, area10])
-area01.setAdjArea([area00, area02])
-area02.setAdjArea([area01, area12])
-area10.setAdjArea([area00, area20])
+// area00.setAdjArea([area01, area10])
+// area01.setAdjArea([area00, area02])
+// area02.setAdjArea([area01, area12])
+// area10.setAdjArea([area00, area20])
 area11.setAdjArea([area12, area21])
-area12.setAdjArea([area02, area11, area22])
-area20.setAdjArea([area10, area21])
-area21.setAdjArea([area11, area20, area22])
-area22.setAdjArea([area21, area12])
+// area12.setAdjArea([area02, area11, area22])
+// area20.setAdjArea([area10, area21])
+// area21.setAdjArea([area11, area20, area22])
+// area22.setAdjArea([area21, area12])
 
 
-let player = new Player(area11)
+// let player = new Player(area11)
 
-//an example of using the CommandParser
+let newGame = new JsonLoader()
+
+let area:Area[] = newGame.parseArea()
+let player:Player = newGame.parsePlayer()
+newGame.parseItem()
+newGame.parseHazard()
+
+console.log(area[4])
+
 let parser = new CommandParser(handleInput); //pass in the "handler" callback
 console.log('Input a command:')
 

@@ -1,0 +1,129 @@
+{
+    "areas":[
+        {
+            "ID": "0",
+            "name": "Slytherin Dungeon",
+            "description": "You are at Slytherin Dungeon",
+            "locationX": 0,
+            "locationY": 0,
+            "adjacent": [1, 3]
+        },
+        {
+            "ID": "1",
+            "name": "Divination Classroom",
+            "description": "You are at the divination classroom",
+            "locationX": 0,
+            "locationY": 1,
+            "adjacent": [0, 2]
+            
+        },
+        {
+            "ID": "2",
+            "name": "Dumbledore Office",
+            "description": "Dumbledore is looking at you",
+            "locationX": 0,
+            "locationY": 2,
+            "adjacent": [5, 1]
+        },
+        {
+            "ID": "3",
+            "name": "Hospital Wing",
+            "description": "YYou are at the Hospital Wing",
+            "locationX": 1,
+            "locationY": 0,
+            "adjacent": [0, 6]
+        },
+        {
+            "ID": "4",
+            "name": "Gryffindor Common Room",
+            "description": "You are at the start point: Gryffindor Common Room",
+            "locationX": 1,
+            "locationY": 1,
+            "adjacent": [5, 7]
+        },
+        {
+            "ID": "5",
+            "name": "Disused Classroom",
+            "description": "You are at the Disused Classroo",
+            "locationX": 1,
+            "locationY": 2,
+            "adjacent": [2,4,8]
+        },
+        {
+            "ID": "6",
+            "name": "Forbidden Forest",
+            "description": "You are at the Forbidden Forest",
+            "locationX": 2,
+            "locationY": 0,
+            "adjacent": [3,7]
+        },
+        {
+            "ID": "7",
+            "name": "Storage Room",
+            "description": "You are at the Storage Room",
+            "locationX": 2,
+            "locationY": 1,
+            "adjacent": [4,6,8]
+        },
+        {
+            "ID": "8",
+            "name": "Trophy Room",
+            "description": "You are at the Trophy Room",
+            "locationX": 2,
+            "locationY": 2,
+            "adjacent": [5, 7]
+        }
+    ],
+
+    "item":[
+        {
+            "ID":0,
+            "name": "Flying Broom",
+            "area": 7
+        },
+        {
+            "ID":1,
+            "name": "Invisible Cloak",
+            "area": 3
+        },
+        {
+            "ID":2,
+            "name": "Crystal Ball",
+            "area": 8
+        },
+        {
+            "ID":3,
+            "name": "Spell Scroll",
+            "area": 5
+        },
+        {
+            "ID":4,
+            "name": "Goblet of Fire",
+            "area": 0
+        }
+    ],
+
+    "hazard":[
+        {
+            "ID":0,
+            "name": "Cliff",
+            "area": 6
+        },
+        {
+            "ID":1,
+            "name": "Snape",
+            "area": 0
+        },
+        {
+            "ID":2,
+            "name": "Divination",
+            "area": 1
+        }
+    ],
+
+    "player": {
+            "area": 4
+    }
+
+
+}

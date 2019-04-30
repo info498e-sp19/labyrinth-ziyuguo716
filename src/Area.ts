@@ -37,6 +37,16 @@ export class Area{
         return this.item;
     }
 
+    public addItem(item:IItem){
+        this.item = item
+        this.isTaken = false
+    }
+
+    public addHazard(hazard:IHazard){
+        this.hazard = hazard
+        this.isClear = false
+    }
+
     public setAdjArea(area: Area[]){
         this.nextArea = area
         area.forEach(a => {
@@ -95,16 +105,16 @@ export class Area{
         console.log(this.getName().toUpperCase())
         console.log(this.description)
         if (!this.isClear){
-            console.log(this.hazard.sayHi())
+            this.hazard.sayHi()
         } else {
-            this.sayBye();
+            this.showNext();
         }
         if(!this.isTaken){
-            console.log(this.item.sayHi())
+            this.item.sayHi()
         }
     }
 
-    public sayBye(){
+    public showNext(){
         console.log("There are doors to the: ")
         this.dir.forEach(d => {
             console.log(d)

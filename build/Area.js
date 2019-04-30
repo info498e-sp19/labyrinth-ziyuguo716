@@ -28,6 +28,14 @@ class Area {
     getItem() {
         return this.item;
     }
+    addItem(item) {
+        this.item = item;
+        this.isTaken = false;
+    }
+    addHazard(hazard) {
+        this.hazard = hazard;
+        this.isClear = false;
+    }
     setAdjArea(area) {
         this.nextArea = area;
         area.forEach(a => {
@@ -77,16 +85,16 @@ class Area {
         console.log(this.getName().toUpperCase());
         console.log(this.description);
         if (!this.isClear) {
-            console.log(this.hazard.sayHi());
+            this.hazard.sayHi();
         }
         else {
-            this.sayBye();
+            this.showNext();
         }
         if (!this.isTaken) {
-            console.log(this.item.sayHi());
+            this.item.sayHi();
         }
     }
-    sayBye() {
+    showNext() {
         console.log("There are doors to the: ");
         this.dir.forEach(d => {
             console.log(d);

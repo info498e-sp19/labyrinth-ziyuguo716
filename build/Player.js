@@ -68,7 +68,6 @@ class Player {
                 if (item.toUpperCase() === this.currArea.getHazard().getItemName().toUpperCase()) {
                     this.currArea.removeHazard();
                     i.printSuccess();
-                    this.currArea.sayBye();
                     return;
                 }
                 else {
@@ -101,6 +100,11 @@ class Player {
                 console.log('Please keep searching for the treasure');
             }
         }
+    }
+    die() {
+        console.log('The Dementor took your soul......');
+        console.log('Game over! Good luck next time!');
+        return false;
     }
 }
 exports.Player = Player;

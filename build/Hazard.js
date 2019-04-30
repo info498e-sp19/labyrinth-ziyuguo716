@@ -53,7 +53,7 @@ class Divination {
         console.log('Professor Sybill Trelawney is having a divination class.');
     }
     printFail() {
-        console.log('Professor Trelawney won\'t let you go if you do not bring your own crystal ball');
+        console.log('Professor Trelawney won\'t let you go if you do not finish the class with your Crystal Ball');
     }
 }
 exports.Divination = Divination;

@@ -10,7 +10,7 @@ export class FlyingBroom implements IItem {
     constructor() {
     }
 
-    public sayHi() {
+    public sayHi():void {
         console.log('There is a Flying Broom on the floor')
     }
     public getName() {
@@ -35,8 +35,8 @@ export class InvisibleCloak implements IItem {
         return this.name;
     }
     public printSuccess() {
-        console.log('You put on the Cloak of Invisibility and sneak out of the classroom.')
-        console.log('Prof. Snape cannot see you because you are invisible now.')
+        console.log('You put on the Cloak of Invisibility and go invisible.')
+        console.log('Prof. Snape cannot see you now and you have a chance to get the Goblet of Fire!')
     }
     public printFail() {
         console.log('You put on the Cloak of Invisibility. But there is nobody around you. You wasted it.')
@@ -92,9 +92,9 @@ export class Goblet implements IItem {
         return this.name;
     }
     public printSuccess() {
-        console.log('You took the Goblet of Fire and Snape did not see you!')
+        console.log('You successfully took the Goblet of Fire! Bring it to professor Dumbledore!')
     }
     public printFail() {
-        console.log('You used the Goblet but nothing happened. You have to bring it to the exit!!')
+        console.log('You used the Goblet but nothing happened. You have to bring it to professor Dumbledore!!!')
     }
 }
