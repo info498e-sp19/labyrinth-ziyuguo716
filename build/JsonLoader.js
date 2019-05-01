@@ -5,6 +5,7 @@ const Location_1 = require("./Location");
 const Hazard_1 = require("./Hazard");
 const Item_1 = require("./Item");
 const Player_1 = require("./Player");
+const Monster_1 = require("./Monster");
 class JsonLoader {
     constructor() {
         this.data = require('../SRC/my_data.json');
@@ -27,27 +28,55 @@ class JsonLoader {
     }
     parseItem() {
         this.data.item.forEach(i => {
-            if (i.ID == 0)
-                this.area[i.area].addItem(new Item_1.FlyingBroom());
-            else if (i.ID == 1)
-                this.area[i.area].addItem(new Item_1.InvisibleCloak());
-            else if (i.ID == 2)
-                this.area[i.area].addItem(new Item_1.CrystalBall());
-            else if (i.ID == 3)
-                this.area[i.area].addItem(new Item_1.SpellScroll());
-            else if (i.ID == 4)
-                this.area[i.area].addItem(new Item_1.Goblet());
+            if (i.ID == 0) {
+                i.area.forEach(a => {
+                    this.area[a].addItem(new Item_1.FlyingBroom());
+                });
+            }
+            else if (i.ID == 1) {
+                i.area.forEach(a => {
+                    this.area[a].addItem(new Item_1.InvisibleCloak());
+                });
+            }
+            else if (i.ID == 2) {
+                i.area.forEach(a => {
+                    this.area[a].addItem(new Item_1.CrystalBall());
+                });
+            }
+            else if (i.ID == 3) {
+                i.area.forEach(a => {
+                    this.area[a].addItem(new Item_1.SpellScroll());
+                });
+            }
+            else if (i.ID == 4) {
+                i.area.forEach(a => {
+                    this.area[a].addItem(new Item_1.Goblet());
+                });
+            }
         });
     }
     parseHazard() {
-        this.data.hazard.forEach(i => {
-            if (i.ID == 0)
-                this.area[i.area].addHazard(new Hazard_1.Cliff());
-            else if (i.ID == 1)
-                this.area[i.area].addHazard(new Hazard_1.Snape());
-            else if (i.ID == 2)
-                this.area[i.area].addHazard(new Hazard_1.Divination());
+        this.data.hazard.forEach(h => {
+            if (h.ID == 0) {
+                h.area.forEach(a => {
+                    this.area[a].addHazard(new Hazard_1.Cliff());
+                });
+            }
+            else if (h.ID == 1) {
+                h.area.forEach(a => {
+                    this.area[a].addHazard(new Hazard_1.Snape());
+                });
+            }
+            else if (h.ID == 2) {
+                h.area.forEach(a => {
+                    this.area[a].addHazard(new Hazard_1.Divination());
+                });
+            }
         });
+    }
+    parseMonster() {
+        this.monster = new Monster_1.Monster(this.area[this.data.monster.area]);
+        return this.monster;
     }
     parsePlayer() {
         this.player = new Player_1.Player(this.area[this.data.player.area]);

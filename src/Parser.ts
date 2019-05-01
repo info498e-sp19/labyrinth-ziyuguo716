@@ -80,4 +80,5 @@ export class CommandParser {
   public start() {
     this.io.prompt();
   }
+
 }

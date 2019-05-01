@@ -1,12 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 class Area {
-    constructor(name, description, location, item, hazard) {
+    constructor(name, description, location, item, hazard, monster) {
         this.name = name;
         this.description = description;
         this.location = location;
         this.item = item;
         this.hazard = hazard;
+        this.monster = monster;
         this.nextArea = [];
         this.dir = [];
         this.isTaken = false;
@@ -15,9 +16,6 @@ class Area {
             this.isTaken = true;
         if (this.hazard == undefined)
             this.isClear = true;
-    }
-    hasItem(itemName) {
-        return itemName.toUpperCase() === this.item.getName().toUpperCase();
     }
     getName() {
         return this.name;
@@ -35,6 +33,9 @@ class Area {
     addHazard(hazard) {
         this.hazard = hazard;
         this.isClear = false;
+    }
+    getMonster() {
+        return this.monster;
     }
     setAdjArea(area) {
         this.nextArea = area;
@@ -71,6 +72,22 @@ class Area {
     }
     checkClear() {
         return this.isClear;
+    }
+    hasItem(itemName) {
+        return itemName.toUpperCase() === this.item.getName().toUpperCase();
+    }
+    hasMonster() {
+        let hasMonster = false;
+        if (this.monster != undefined) {
+            hasMonster = true;
+        }
+        return hasMonster;
+    }
+    addMonster(mons) {
+        this.monster = mons;
+    }
+    removeMonster() {
+        this.monster = undefined;
     }
     removeHazard() {
         this.isClear = true;

@@ -4,6 +4,7 @@ import { Location } from './Location'
 import { IHazard, Divination, Cliff, Snape } from './Hazard'
 import { IItem, FlyingBroom, InvisibleCloak, CrystalBall, SpellScroll, Goblet } from './Item'
 import { Player } from './Player';
+import { Monster } from './Monster';
 
 
 export class JsonLoader{
@@ -12,6 +13,7 @@ export class JsonLoader{
     private data = require('../SRC/my_data.json');
     private area: Area[] = []
     private player: Player
+    private monster: Monster
     
 
     public parseArea(){
@@ -34,28 +36,57 @@ export class JsonLoader{
 
     public parseItem(){
         this.data.item.forEach(i => {
-            if(i.ID==0)
-                this.area[i.area].addItem(new FlyingBroom())
-            else if(i.ID==1)
-                this.area[i.area].addItem(new InvisibleCloak())
-            else if(i.ID==2)
-                this.area[i.area].addItem(new CrystalBall())
-            else if(i.ID==3)
-                this.area[i.area].addItem(new SpellScroll())
-            else if(i.ID==4)
-                this.area[i.area].addItem(new Goblet())
+            if(i.ID==0){
+                i.area.forEach(a => {
+                    this.area[a].addItem(new FlyingBroom())
+                });
+            }
+            else if(i.ID==1){
+                i.area.forEach(a => {
+                    this.area[a].addItem(new InvisibleCloak())
+                });
+            }
+            else if(i.ID==2){
+                i.area.forEach(a => {
+                    this.area[a].addItem(new CrystalBall())
+                });
+            }
+            else if(i.ID==3){
+                i.area.forEach(a => {
+                    this.area[a].addItem(new SpellScroll())
+                });
+            }
+            else if(i.ID==4){
+                i.area.forEach(a => {
+                    this.area[a].addItem(new Goblet())
+                });
+            }
         });
     }
 
     public parseHazard(){
-        this.data.hazard.forEach(i => {
-            if(i.ID==0)
-                this.area[i.area].addHazard(new Cliff())
-            else if(i.ID==1)
-                this.area[i.area].addHazard(new Snape())
-            else if(i.ID==2)
-                this.area[i.area].addHazard(new Divination())
+        this.data.hazard.forEach(h => {
+            if(h.ID==0){
+                h.area.forEach(a => {
+                    this.area[a].addHazard(new Cliff())
+                });
+            }
+            else if(h.ID==1){
+                h.area.forEach(a => {
+                    this.area[a].addHazard(new Snape())
+                });
+            }
+            else if(h.ID==2){
+                h.area.forEach(a => {
+                    this.area[a].addHazard(new Divination())
+                });
+            }
         });
+    }
+
+    public parseMonster(){
+        this.monster = new Monster(this.area[this.data.monster.area])
+        return this.monster
     }
 
     public parsePlayer(){

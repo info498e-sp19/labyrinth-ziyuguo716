@@ -31,7 +31,7 @@ class Snape {
         return this.itemName;
     }
     sayHi() {
-        console.log('Professor Snape is standing in front of you with an angry face. The Goblet of Fire is just behind him!!');
+        console.log('Professor Snape is standing in front of you with an angry face.');
     }
     printFail() {
         console.log('Professor doesn\'t give you any chance to approach the Goblet');

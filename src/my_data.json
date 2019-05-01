@@ -19,7 +19,7 @@
         },
         {
             "ID": "2",
-            "name": "Dumbledore Office",
+            "name": "Dumbledore's Office",
             "description": "Dumbledore is looking at you",
             "locationX": 0,
             "locationY": 2,
@@ -28,7 +28,7 @@
         {
             "ID": "3",
             "name": "Hospital Wing",
-            "description": "YYou are at the Hospital Wing",
+            "description": "You are at the Hospital Wing",
             "locationX": 1,
             "locationY": 0,
             "adjacent": [0, 6]
@@ -79,27 +79,27 @@
         {
             "ID":0,
             "name": "Flying Broom",
-            "area": 7
+            "area": [7]
         },
         {
             "ID":1,
             "name": "Invisible Cloak",
-            "area": 3
+            "area": [3]
         },
         {
             "ID":2,
             "name": "Crystal Ball",
-            "area": 8
+            "area": [8]
         },
         {
             "ID":3,
             "name": "Spell Scroll",
-            "area": 5
+            "area": [5]
         },
         {
             "ID":4,
             "name": "Goblet of Fire",
-            "area": 0
+            "area": [0]
         }
     ],
 
@@ -107,19 +107,23 @@
         {
             "ID":0,
             "name": "Cliff",
-            "area": 6
+            "area": [6]
         },
         {
             "ID":1,
             "name": "Snape",
-            "area": 0
+            "area": [0]
         },
         {
             "ID":2,
             "name": "Divination",
-            "area": 1
+            "area": [1]
         }
     ],
+
+    "monster":{
+            "area": 2
+        },
 
     "player": {
             "area": 4
