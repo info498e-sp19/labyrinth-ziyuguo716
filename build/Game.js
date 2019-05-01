@@ -10,7 +10,6 @@ class Game {
         this.monster = this.jsonloader.parseMonster();
         this.handleInput = ((cmd, arg) => {
             console.log("@@@@@@@@@@@ Harry Porter Labyrinth @@@@@@@@@@@");
-            console.log('Player is !!!!!' + this.player.getCurrArea());
             if (!this.player.checkIsTrapped()) {
                 //if player is entangled with monster, 
                 //monster does not move until player takes an action
