@@ -32,7 +32,7 @@ export class Game{
         parser.start();
     }
 
-    private handleInput(cmd: Command, arg: string): boolean {
+    private handleInput = ((cmd: Command, arg: string): boolean  =>  {
         console.log("@@@@@@@@@@@ Harry Porter Labyrinth @@@@@@@@@@@");
         
         if (!this.player.checkIsTrapped()) { 
@@ -67,6 +67,6 @@ export class Game{
         console.log('What would you like to do?')
       
         return true; //return true to indicate that it should prompt for another input
-      }
+      })
 
 }
