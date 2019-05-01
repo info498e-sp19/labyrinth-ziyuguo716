@@ -32,9 +32,8 @@ export class Game{
         parser.start();
     }
 
-    private handleInput(cmd: Command, arg: string): boolean {
+    private handleInput = ((cmd: Command, arg: string): boolean => {
         console.log("@@@@@@@@@@@ Harry Porter Labyrinth @@@@@@@@@@@");
-        console.log('Player is !!!!!' + this.player.getCurrArea())
         if (!this.player.checkIsTrapped()) { 
           //if player is entangled with monster, 
           //monster does not move until player takes an action
@@ -67,6 +66,6 @@ export class Game{
         console.log('What would you like to do?')
       
         return true; //return true to indicate that it should prompt for another input
-      }
+      })
 
 }
