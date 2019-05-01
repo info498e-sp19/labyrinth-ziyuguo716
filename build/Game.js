@@ -8,7 +8,6 @@ class Game {
         this.area = this.jsonloader.parseArea();
         this.player = this.jsonloader.parsePlayer();
         this.monster = this.jsonloader.parseMonster();
-        this.parser = new Parser_1.CommandParser(this.handleInput);
         this.jsonloader.parseItem();
         this.jsonloader.parseHazard();
     }
@@ -22,10 +21,12 @@ class Game {
         this.player.getCurrArea().sayHi();
         console.log('');
         console.log('What would you like to do?');
-        this.parser.start();
+        let parser = new Parser_1.CommandParser(this.handleInput);
+        parser.start();
     }
     handleInput(cmd, arg) {
         console.log("@@@@@@@@@@@ Harry Porter Labyrinth @@@@@@@@@@@");
+        console.log('Player is !!!!!' + this.player.getCurrArea());
         if (!this.player.checkIsTrapped()) {
             //if player is entangled with monster, 
             //monster does not move until player takes an action
