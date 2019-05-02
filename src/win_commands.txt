@@ -1,5 +1,6 @@
 Go east
 take spell scroll
+Go south
 take crystal ball
 Go west
 take flying broom
