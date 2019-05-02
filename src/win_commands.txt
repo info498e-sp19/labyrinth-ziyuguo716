@@ -1,0 +1,17 @@
+Go east
+take spell scroll
+Go south
+take crystal ball
+Go west
+take flying broom
+Go west
+use flying broom
+Go north
+take cloak of invisibility
+Go north
+use cloak of invisibility
+take goblet of fire
+Go east
+use crystal ball
+use spell scroll
+Go east

@@ -1,0 +1,3 @@
+Go east
+Go north
+Inventory
